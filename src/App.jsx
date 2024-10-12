@@ -12,7 +12,7 @@ function App() {
             <AuthProvider>
                 <Router>
                     <Routes>
-                        <Route path="/" element={<AuthPage />} />
+                        <Route path="/" element={<Home />} />
                     </Routes>
                 </Router>
             </AuthProvider>
