@@ -60,11 +60,12 @@ const Dash = () => {
                 <div className="w-full h-20 bg-gray-800 text-white flex justify-between items-center p-6">
                     <h1 className="text-3xl">Your Dashboard</h1>
                     <div className="text-gray-600 space-x-2">
-                        <button onClick={handleAddJob}>Add New</button>
+                        <button onClick={openModal}>Add New</button>
                         <button onClick={logout}>Logout</button>
                     </div>
                 </div>
                 <div className="p-6 max-w-screen-xl">
+                    {modalOpen && <AddJobModal onAdd={handleAddJob} onClose={closeModal}/>}
                     <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 grid-rows-8 md:grid-rows-8 lg:grid-rows-5 gap-6 text-white">
 
                         <div className={cardClassname + ""}>
@@ -104,7 +105,6 @@ const Dash = () => {
                         </div>
                     </div>
                     <div className="bg-white mt-24">
-                        {modalOpen && <AddJobModal onAdd={handleAddJob} onClose={closeModal}/>}
                         <DataGrid columns={tableColumns} rows={jobs} getRowId={(row) => row.jobId.counter}/>
                     </div>
 

@@ -26,52 +26,55 @@ const AddJobModal = ({ onAdd, onClose }) => {
     };
 
     return (
-        <div className="modal absolute z-10 flex">
-            <div className="modal-content bg-gray-100  justify-center">
+        <div className="z-10 absolute">
+            <div className="z-10 flex justify-center">
+                <div className="modal-content bg-gray-100 justify-center">
                 <span className="close" onClick={onClose}>
                     &times;
                 </span>
-                <h2>Add New Job</h2>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>Job Title:</label>
-                        <input
-                            type="text"
-                            value={jobTitle}
-                            onChange={(e) => setJobTitle(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Company Name:</label>
-                        <input
-                            type="text"
-                            value={companyName}
-                            onChange={(e) => setCompanyName(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Application Date:</label>
-                        <input
-                            type="date"
-                            value={applicationDate}
-                            onChange={(e) => setApplicationDate(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Status:</label>
-                        <input
-                            type="text"
-                            value={status}
-                            onChange={(e) => setStatus(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <button type="submit">Add Job</button>
-                </form>
+                    <h2>Add New Job</h2>
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <label>Job Title:</label>
+                            <input
+                                type="text"
+                                value={jobTitle}
+                                onChange={(e) => setJobTitle(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label>Company Name:</label>
+                            <input
+                                type="text"
+                                value={companyName}
+                                onChange={(e) => setCompanyName(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label>Application Date:</label>
+                            <input
+                                type="date"
+                                value={applicationDate}
+                                onChange={(e) => setApplicationDate(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label>Status:</label>
+                            <input
+                                type="text"
+                                value={status}
+                                onChange={(e) => setStatus(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <button type="submit">Add Job</button>
+                    </form>
+                </div>
             </div>
+
         </div>
     );
 };
