@@ -6,19 +6,21 @@ const Login = () => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const [error, setError] = useState(null);
     const {login, isAuthenticated} = useAuth()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError(null);
         try {
             const response = await authService.attemptLogin(username, password);
             if (response.token) {
+                console.log("Has token, doing login");
                 login(response.token);
             }
 
         } catch (error) {
-            console.log(error);
+            console.log("Error:", error);
             setError(error);
         }
     }
@@ -47,7 +49,7 @@ const Login = () => {
                     />
                 </div>
                 <button type="submit">Login</button>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
+                {error && <p style={{ color: 'red' }}>{error.message}</p>}
             </form>
         </>
     )
