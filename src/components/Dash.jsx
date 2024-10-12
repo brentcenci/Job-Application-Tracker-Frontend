@@ -6,7 +6,7 @@ import {DataGrid} from "@mui/x-data-grid";
 
 const Dash = () => {
 
-    const cardClassname = "bg-gray-800 rounded-md p-6 shadow-md "
+    const cardClassname = "bg-white text-gray-900 rounded-md p-6 shadow-md "
     const {logout, token, isAuthenticated} = useAuth()
     const [jobs, setJobs] = useState([])
     const [modalOpen, setModalOpen] = useState(false);
@@ -47,34 +47,33 @@ const Dash = () => {
     }
 
     const tableColumns = [
-        { field: "jobId", headerName: "Job ID", width:  100 },
-        { field: 'jobTitle', headerName: 'Job Title', width: 150 },
-        { field: 'companyName', headerName: 'Company', width: 150 },
-        { field: 'applicationDate', headerName: 'Application Date', width: 150 },
+        { field: 'jobTitle', headerName: 'Job Title', width: 150},
+        { field: 'companyName', headerName: 'Company', width: 150},
+        { field: 'applicationDate', headerName: 'Application Date', width: 150},
         { field: 'status', headerName: 'Status', width: 150 }
     ];
 
     return(
         <>
-            <div className="bg-gray-700">
-                <div className="w-full h-20 bg-gray-800 text-white flex justify-between items-center p-6">
+            <div className="bg-slate-100">
+                <div className="w-full h-20 bg-white text-gray-900 flex justify-between items-center p-6">
                     <h1 className="text-3xl">Your Dashboard</h1>
                     <div className="text-gray-600 space-x-2">
                         <button onClick={openModal}>Add New</button>
                         <button onClick={logout}>Logout</button>
                     </div>
                 </div>
-                <div className="p-6 max-w-screen-xl">
+                <div className="p-6 max-w-screen-xl mx-auto">
                     {modalOpen && <AddJobModal onAdd={handleAddJob} onClose={closeModal}/>}
                     <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 grid-rows-8 md:grid-rows-8 lg:grid-rows-5 gap-6 text-white">
 
                         <div className={cardClassname + ""}>
-                            <div className="text-2xl font-semibold mb-1">17</div>
+                            <div className="text-2xl font-semibold mb-1">{jobs.length}</div>
                             <div className="text-sm font-medium text-gray-400">Total Applications</div>
                         </div>
 
                         <div className={cardClassname + ""}>
-                            <div className="text-2xl font-semibold mb-1">2</div>
+                            <div className="text-2xl font-semibold mb-1">{jobs.filter(value => value.status !== "Declined").length}</div>
                             <div className="text-sm font-medium text-gray-400">Active Applications</div>
                         </div>
 
@@ -104,8 +103,13 @@ const Dash = () => {
                             <div className="text-sm font-medium text-gray-400">This box spans two columns</div>
                         </div>
                     </div>
-                    <div className="bg-white mt-24">
-                        <DataGrid columns={tableColumns} rows={jobs} getRowId={(row) => row.jobId.counter}/>
+                    <div className="bg-white mt-24 dark">
+                        <DataGrid
+                            columns={tableColumns}
+                            rows={jobs}
+                            getRowId={(row) => row.jobId.counter}
+                            className=""
+                        />
                     </div>
 
                 </div>

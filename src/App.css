@@ -99,6 +99,52 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+
+  .day {
+    --background: #f6f7f9;
+    --foreground: #22272f;
+    --card: #ffffff;
+    --card-foreground: #22272f;
+    --scale-50: #f7f7f8;
+    --scale-100: #eceef2;
+    --scale-200: #d4dae3;
+    --scale-300: #afbaca;
+    --scale-400: #8495ac;
+    --scale-500: #647793;
+    --scale-600: #506079;
+    --scale-700: #414e63;
+    --scale-800: #374151;
+    --scale-900: #333b47;
+    --scale-950: #22272f;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+
+  .night {
+    --background: #0e0e11;
+    --foreground: #f6f7f9;
+    --card: #18181b;
+    --card-foreground: #f7f7f8;
+    --scale-50: #f7f7f8;
+    --scale-100: #eceef2;
+    --scale-200: #d4dae3;
+    --scale-300: #afbaca;
+    --scale-400: #8495ac;
+    --scale-500: #647793;
+    --scale-600: #506079;
+    --scale-700: #414e63;
+    --scale-800: #374151;
+    --scale-900: #333b47;
+    --scale-950: #22272f;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
 }
 
 @layer base {
