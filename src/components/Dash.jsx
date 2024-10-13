@@ -3,6 +3,10 @@ import {useEffect, useState} from "react";
 import jobService from "@/src/services/jobService.js";
 import AddJobModal from "@/src/components/AddJobModal.jsx";
 import {DataGrid} from "@mui/x-data-grid";
+import {AgGridReact} from "ag-grid-react";
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
+import 'ag-grid-community/styles/ag-theme-quartz.css'
 
 const Dash = () => {
 
@@ -10,6 +14,7 @@ const Dash = () => {
     const {logout, token, isAuthenticated} = useAuth()
     const [jobs, setJobs] = useState([])
     const [modalOpen, setModalOpen] = useState(false);
+    const [darkMode, setDarkMode] = useState(false)
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -46,6 +51,10 @@ const Dash = () => {
         setModalOpen(false);
     }
 
+    const toggleDarkMode = () => {
+        setDarkMode(!darkMode)
+    }
+
     const tableColumns = [
         { field: 'jobTitle', headerName: 'Job Title', width: 150},
         { field: 'companyName', headerName: 'Company', width: 150},
@@ -59,6 +68,7 @@ const Dash = () => {
                 <div className="w-full h-20 bg-white text-gray-900 flex justify-between items-center p-6">
                     <h1 className="text-3xl">Your Dashboard</h1>
                     <div className="text-gray-600 space-x-2">
+                        <button onClick={toggleDarkMode}>Toggle Dark</button>
                         <button onClick={openModal}>Add New</button>
                         <button onClick={logout}>Logout</button>
                     </div>
@@ -110,6 +120,16 @@ const Dash = () => {
                             getRowId={(row) => row.jobId.counter}
                             className=""
                         />
+                        <div
+                            className={`${darkMode ? 'ag-theme-quartz-dark' : 'ag-theme-quartz'}`}
+                            style={{height: '500px', width: '100%'}}
+                        >
+                            <AgGridReact
+                                rowData={jobs}
+                                columnDefs={tableColumns}
+                                defaultColDef={{sortable: true, filter: true, editable: true}}
+                            />
+                        </div>
                     </div>
 
                 </div>
