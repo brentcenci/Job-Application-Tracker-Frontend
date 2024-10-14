@@ -2,7 +2,7 @@ import {useAuth} from "@/src/services/authState.jsx";
 import {useEffect, useState} from "react";
 import jobService from "@/src/services/jobService.js";
 import AddJobModal from "@/src/components/AddJobModal.jsx";
-import {DataGrid} from "@mui/x-data-grid";
+import {AgCharts} from "ag-charts-react";
 import {AgGridReact} from "ag-grid-react";
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
@@ -14,6 +14,21 @@ const Dash = () => {
     const [jobs, setJobs] = useState([])
     const [modalOpen, setModalOpen] = useState(false);
     const [darkMode, setDarkMode] = useState(false)
+/*    const [options, setOptions] = useState({
+        data: jobs,
+        series: [{type: "line", xKey: "applicationDate", yKey: jobs.filter((job) => job.applicationDate === id).length}]
+    })*/
+    const [jobDataByMonth, setJobDataByMonth] = useState(groupJobsByMonth(jobs))
+    const chartOptions = {
+        data: jobDataByMonth,
+        series: [
+            {
+                type: "line",
+                xKey: "month",
+                yKey: "count"
+            }
+        ]
+    }
 
     const cardClassname = darkMode ? "ag-theme-quartz-card-dark p-6 rounded-lg " : "p-6 ag-theme-quartz-card rounded-lg "
 
@@ -44,6 +59,10 @@ const Dash = () => {
         })
     }
 
+    useEffect(() => {
+        setJobDataByMonth(groupJobsByMonth(jobs))
+    }, [jobs]);
+
     const openModal = () => {
         setModalOpen(true);
     }
@@ -56,11 +75,26 @@ const Dash = () => {
         setDarkMode(!darkMode)
     }
 
+    function groupJobsByMonth(jobs) {
+        const groupedData = {};
+
+        jobs.forEach(job => {
+            const date = new Date(job.applicationDate);
+            const monthYear = `${date.getFullYear()}-${date.getMonth() + 1}`; // Format: YYYY-MM
+            groupedData[monthYear] = (groupedData[monthYear] || 0) + 1;
+        });
+
+        return Object.entries(groupedData).map(([month, count]) => ({
+            month,
+            count,
+        }));
+    }
+
     const tableColumns = [
-        { field: 'jobTitle', headerName: 'Job Title', width: 150},
-        { field: 'companyName', headerName: 'Company', width: 150},
-        { field: 'applicationDate', headerName: 'Application Date', width: 150},
-        { field: 'status', headerName: 'Status', width: 150 }
+        { field: 'jobTitle', headerName: 'Job Title', width: 200},
+        { field: 'companyName', headerName: 'Company', width: 200},
+        { field: 'applicationDate', headerName: 'Applied', width: 150, editable: false},
+        { field: 'status', headerName: 'Status', width: 100, cellEditor: 'agSelectCellEditor', cellEditorParams: {values: ["Applied", "Interview", "Offer", "Accepted", "Declined"]} }
     ];
 
     return(
@@ -77,7 +111,7 @@ const Dash = () => {
                 <div className="p-6 max-w-screen-xl mx-auto">
                     {modalOpen && <AddJobModal onAdd={handleAddJob} onClose={closeModal}/>}
                     <div
-                        className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 grid-rows-8 md:grid-rows-8 lg:grid-rows-5 gap-6 text-white">
+                        className="grid auto-rows-min grid-cols-2 md:grid-cols-2 lg:grid-cols-4 grid-rows-8 md:grid-rows-8 lg:grid-rows-5 gap-6 text-white">
 
                         <div className={cardClassname + ""}>
                             <div className="text-2xl font-semibold mb-1">{jobs.length}</div>
@@ -96,8 +130,9 @@ const Dash = () => {
                         </div>
 
                         <div className={cardClassname + "row-span-2 col-span-2 lg:col-span-3"}>
-                            <div className="text-2xl font-semibold mb-1">2</div>
-                            <div className="text-sm font-medium text-gray-400">Users</div>
+                            <AgCharts options={
+                                chartOptions
+                            }/>
                         </div>
 
                         <div className={cardClassname + "col-span-1 row-span-2 md:col-span-1"}>
@@ -116,7 +151,7 @@ const Dash = () => {
                             <div className="text-sm font-medium text-gray-400">This box spans two columns</div>
                         </div>
                     </div>
-                    <div className="bg-white mt-24 rounded-xl">
+                    <div className="bg-white mt-6 rounded-xl">
                         <div
                             className={`${darkMode ? 'ag-theme-quartz-dark' : 'ag-theme-quartz'}`}
                             style={{height: '500px', width: '100%'}}
