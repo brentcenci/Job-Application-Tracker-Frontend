@@ -18,7 +18,10 @@ const Dash = () => {
         data: jobs,
         series: [{type: "line", xKey: "applicationDate", yKey: jobs.filter((job) => job.applicationDate === id).length}]
     })*/
-    const [jobDataByMonth, setJobDataByMonth] = useState(groupJobsByMonth(jobs))
+    const [jobDataByMonth, setJobDataByMonth] = useState(groupJobsByMonth(jobs));
+    const [jobsStatusData, setJobsStatusData] = useState(groupJobsByStatus(jobs));
+
+
     const chartOptions = {
         data: jobDataByMonth,
         series: [
@@ -27,8 +30,25 @@ const Dash = () => {
                 xKey: "month",
                 yKey: "count"
             }
-        ]
-    }
+        ],
+        background: {
+            fill: darkMode ? "color-mix(in srgb, #fff, #182230 97%)" : "#fff"
+        },
+    };
+
+    const pieOptions = {
+        data: jobsStatusData,
+        series: [
+            {
+                type: 'pie',
+                angleKey: 'count',
+                legendItemKey: 'status'
+            }
+        ],
+        background: {
+            fill: darkMode ? "color-mix(in srgb, #fff, #182230 97%)" : "#fff"
+        },
+    };
 
     const cardClassname = darkMode ? "ag-theme-quartz-card-dark p-6 rounded-lg " : "p-6 ag-theme-quartz-card rounded-lg "
 
@@ -57,19 +77,20 @@ const Dash = () => {
                 });
             }
         })
-    }
+    };
 
     useEffect(() => {
-        setJobDataByMonth(groupJobsByMonth(jobs))
+        setJobDataByMonth(groupJobsByMonth(jobs));
+        setJobsStatusData(groupJobsByStatus(jobs));
     }, [jobs]);
 
     const openModal = () => {
         setModalOpen(true);
-    }
+    };
 
     const closeModal = () => {
         setModalOpen(false);
-    }
+    };
 
     const toggleDarkMode = () => {
         setDarkMode(!darkMode)
@@ -86,6 +107,20 @@ const Dash = () => {
 
         return Object.entries(groupedData).map(([month, count]) => ({
             month,
+            count,
+        }));
+    }
+
+    function groupJobsByStatus(jobs) {
+        const groupedData = {};
+
+        jobs.forEach(job => {
+            const status = job.status;
+            groupedData[status] = (groupedData[status] || 0) + 1;
+        });
+
+        return Object.entries(groupedData).map(([status, count]) => ({
+            status,
             count,
         }));
     }
@@ -136,8 +171,9 @@ const Dash = () => {
                         </div>
 
                         <div className={cardClassname + "col-span-1 row-span-2 md:col-span-1"}>
-                            <div className="text-2xl font-semibold mb-1">100</div>
-                            <div className="text-sm font-medium text-gray-400">Companies</div>
+                            <AgCharts options={
+                                pieOptions
+                            }/>
                         </div>
 
 
