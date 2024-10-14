@@ -10,11 +10,12 @@ import 'ag-grid-community/styles/ag-theme-quartz.css'
 
 const Dash = () => {
 
-    const cardClassname = "bg-white text-gray-900 rounded-md p-6 shadow-md "
     const {logout, token, isAuthenticated} = useAuth()
     const [jobs, setJobs] = useState([])
     const [modalOpen, setModalOpen] = useState(false);
     const [darkMode, setDarkMode] = useState(false)
+
+    const cardClassname = darkMode ? "ag-theme-quartz-card-dark p-6 rounded-lg " : "p-6 ag-theme-quartz-card rounded-lg "
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -64,8 +65,8 @@ const Dash = () => {
 
     return(
         <>
-            <div className="bg-slate-100">
-                <div className="w-full h-20 bg-white text-gray-900 flex justify-between items-center p-6">
+            <div className={darkMode ? "bg-gray-700" : "bg-gray-200"}>
+                <div className={`${darkMode ? "ag-theme-quartz-card-dark" : "ag-theme-quartz-card"} w-full h-20 flex justify-between items-center p-6`}>
                     <h1 className="text-3xl">Your Dashboard</h1>
                     <div className="text-gray-600 space-x-2">
                         <button onClick={toggleDarkMode}>Toggle Dark</button>
@@ -75,7 +76,8 @@ const Dash = () => {
                 </div>
                 <div className="p-6 max-w-screen-xl mx-auto">
                     {modalOpen && <AddJobModal onAdd={handleAddJob} onClose={closeModal}/>}
-                    <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 grid-rows-8 md:grid-rows-8 lg:grid-rows-5 gap-6 text-white">
+                    <div
+                        className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 grid-rows-8 md:grid-rows-8 lg:grid-rows-5 gap-6 text-white">
 
                         <div className={cardClassname + ""}>
                             <div className="text-2xl font-semibold mb-1">{jobs.length}</div>
@@ -83,7 +85,8 @@ const Dash = () => {
                         </div>
 
                         <div className={cardClassname + ""}>
-                            <div className="text-2xl font-semibold mb-1">{jobs.filter(value => value.status !== "Declined").length}</div>
+                            <div
+                                className="text-2xl font-semibold mb-1">{jobs.filter(value => value.status !== "Declined").length}</div>
                             <div className="text-sm font-medium text-gray-400">Active Applications</div>
                         </div>
 
@@ -113,13 +116,7 @@ const Dash = () => {
                             <div className="text-sm font-medium text-gray-400">This box spans two columns</div>
                         </div>
                     </div>
-                    <div className="bg-white mt-24 dark">
-                        <DataGrid
-                            columns={tableColumns}
-                            rows={jobs}
-                            getRowId={(row) => row.jobId.counter}
-                            className=""
-                        />
+                    <div className="bg-white mt-24 rounded-xl">
                         <div
                             className={`${darkMode ? 'ag-theme-quartz-dark' : 'ag-theme-quartz'}`}
                             style={{height: '500px', width: '100%'}}
