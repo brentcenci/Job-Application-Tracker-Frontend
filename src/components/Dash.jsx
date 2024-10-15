@@ -14,10 +14,6 @@ const Dash = () => {
     const [jobs, setJobs] = useState([])
     const [modalOpen, setModalOpen] = useState(false);
     const [darkMode, setDarkMode] = useState(false)
-/*    const [options, setOptions] = useState({
-        data: jobs,
-        series: [{type: "line", xKey: "applicationDate", yKey: jobs.filter((job) => job.applicationDate === id).length}]
-    })*/
     const [jobDataByMonth, setJobDataByMonth] = useState(groupJobsByMonth(jobs));
     const [jobsStatusData, setJobsStatusData] = useState(groupJobsByStatus(jobs));
 
@@ -127,9 +123,12 @@ const Dash = () => {
 
     const tableColumns = [
         { field: 'jobTitle', headerName: 'Job Title', width: 200},
+        { field: 'jobLevel', headerName: 'Level', width: 150},
+        { field: 'industry', headerName: 'Industry', width: 150 },
         { field: 'companyName', headerName: 'Company', width: 200},
         { field: 'applicationDate', headerName: 'Applied', width: 150, editable: false},
-        { field: 'status', headerName: 'Status', width: 100, cellEditor: 'agSelectCellEditor', cellEditorParams: {values: ["Applied", "Interview", "Offer", "Accepted", "Declined"]} }
+        { field: 'status', headerName: 'Status', width: 100, cellEditor: 'agSelectCellEditor', cellEditorParams: {values: ["Applied", "Interview", "Offer", "Accepted", "Declined"]} },
+        { field: 'source', headerName: 'Source', width: 150 },
     ];
 
     return(
