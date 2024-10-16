@@ -17,6 +17,28 @@ const Dash = () => {
     const [jobDataByMonth, setJobDataByMonth] = useState(groupJobsByMonth(jobs));
     const [jobsStatusData, setJobsStatusData] = useState(groupJobsByStatus(jobs));
 
+    const gridOpt = {
+        rowData: jobs,
+        columnDefs: [
+            { field: 'jobTitle', headerName: 'Job Title', width: 200},
+            { field: 'jobLevel', headerName: 'Level', width: 150},
+            { field: 'industry', headerName: 'Industry', width: 150 },
+            { field: 'companyName', headerName: 'Company', width: 200},
+            { field: 'applicationDate', headerName: 'Applied', width: 150, editable: false},
+            { field: 'status', headerName: 'Status', width: 100, cellEditor: 'agSelectCellEditor', cellEditorParams: {values: ["Applied", "Interview", "Offer", "Accepted", "Declined"]} },
+            { field: 'source', headerName: 'Source', width: 150 },
+        ],
+        defaultColDef: {
+            sortable: true,
+            filter: true,
+            editable: true
+        },
+        readOnlyEdit: true,
+        onCellEditRequest: event => onCellEdit(event),
+    };
+
+    const [gridOptions, setGridOptions] = useState(gridOpt);
+
 
     const chartOptions = {
         data: jobDataByMonth,
@@ -78,6 +100,25 @@ const Dash = () => {
     useEffect(() => {
         setJobDataByMonth(groupJobsByMonth(jobs));
         setJobsStatusData(groupJobsByStatus(jobs));
+        setGridOptions({
+            rowData: jobs,
+            columnDefs: [
+                { field: 'jobTitle', headerName: 'Job Title', width: 200},
+                { field: 'jobLevel', headerName: 'Level', width: 150},
+                { field: 'industry', headerName: 'Industry', width: 150 },
+                { field: 'companyName', headerName: 'Company', width: 200},
+                { field: 'applicationDate', headerName: 'Applied', width: 150, editable: false},
+                { field: 'status', headerName: 'Status', width: 100, cellEditor: 'agSelectCellEditor', cellEditorParams: {values: ["Applied", "Interview", "Offer", "Accepted", "Declined"]} },
+                { field: 'source', headerName: 'Source', width: 150 },
+            ],
+            defaultColDef: {
+                sortable: true,
+                filter: true,
+                editable: true
+            },
+            readOnlyEdit: true,
+            onCellEditRequest: event => onCellEdit(event),
+        });
     }, [jobs]);
 
     const openModal = () => {
@@ -121,7 +162,7 @@ const Dash = () => {
         }));
     }
 
-    const tableColumns = [
+/*    const tableColumns = [
         { field: 'jobTitle', headerName: 'Job Title', width: 200},
         { field: 'jobLevel', headerName: 'Level', width: 150},
         { field: 'industry', headerName: 'Industry', width: 150 },
@@ -129,7 +170,36 @@ const Dash = () => {
         { field: 'applicationDate', headerName: 'Applied', width: 150, editable: false},
         { field: 'status', headerName: 'Status', width: 100, cellEditor: 'agSelectCellEditor', cellEditorParams: {values: ["Applied", "Interview", "Offer", "Accepted", "Declined"]} },
         { field: 'source', headerName: 'Source', width: 150 },
-    ];
+    ];*/
+
+/*    function getGridOptions(jobs) {
+        return {
+            rowData: jobs,
+            columnDefs: [
+                { field: 'jobTitle', headerName: 'Job Title', width: 200},
+                { field: 'jobLevel', headerName: 'Level', width: 150},
+                { field: 'industry', headerName: 'Industry', width: 150 },
+                { field: 'companyName', headerName: 'Company', width: 200},
+                { field: 'applicationDate', headerName: 'Applied', width: 150, editable: false},
+                { field: 'status', headerName: 'Status', width: 100, cellEditor: 'agSelectCellEditor', cellEditorParams: {values: ["Applied", "Interview", "Offer", "Accepted", "Declined"]} },
+                { field: 'source', headerName: 'Source', width: 150 },
+            ],
+            defaultColDef: {
+                sortable: true,
+                filter: true,
+                editable: true
+            },
+            readOnlyEdit: true,
+        }
+    }*/
+
+
+
+    function onCellEdit(event) {
+        console.log("Edit request: ", event)
+    }
+
+
 
     return(
         <>
@@ -154,7 +224,7 @@ const Dash = () => {
 
                         <div className={cardClassname + ""}>
                             <div
-                                className="text-2xl font-semibold mb-1">{jobs.filter(value => value.status !== "Declined").length}</div>
+                                className="text-2xl font-semibold mb-1">{jobs.filter(value => value.status !== "Declined" && value.status !== "Rejected").length}</div>
                             <div className="text-sm font-medium text-gray-400">Active Applications</div>
                         </div>
 
@@ -192,9 +262,8 @@ const Dash = () => {
                             style={{height: '500px', width: '100%'}}
                         >
                             <AgGridReact
+                                gridOptions={gridOptions}
                                 rowData={jobs}
-                                columnDefs={tableColumns}
-                                defaultColDef={{sortable: true, filter: true, editable: true}}
                             />
                         </div>
                     </div>
