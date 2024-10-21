@@ -88,7 +88,10 @@ const Dash = () => {
                 xKey: "level",
                 yKey: "count"
             }
-        ]
+        ],
+        background: {
+            fill: darkMode ? "color-mix(in srgb, #fff, #182230 97%)" : "#fff"
+        },
     }
 
     const cardClassname = darkMode ? "ag-theme-quartz-card-dark p-6 rounded-lg " : "p-6 ag-theme-quartz-card rounded-lg "
