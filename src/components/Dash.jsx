@@ -16,10 +16,11 @@ const Dash = () => {
     const [darkMode, setDarkMode] = useState(false)
     const [jobDataByMonth, setJobDataByMonth] = useState(groupJobsByMonth(jobs));
     const [jobsStatusData, setJobsStatusData] = useState(groupJobsByStatus(jobs));
-
-    const gridOpt = {
+    const [jobsSourceData, setJobsSourceData] = useState(groupJobsBySource(jobs));
+    const [jobsLevelData, setJobsLevelData] = useState(groupJobsByLevel(jobs));
+    const [gridOptions, setGridOptions] = useState({
         rowData: jobs,
-        columnDefs: [
+            columnDefs: [
             { field: 'jobTitle', headerName: 'Job Title', width: 200},
             { field: 'jobLevel', headerName: 'Level', width: 150},
             { field: 'industry', headerName: 'Industry', width: 150 },
@@ -28,17 +29,14 @@ const Dash = () => {
             { field: 'status', headerName: 'Status', width: 100, cellEditor: 'agSelectCellEditor', cellEditorParams: {values: ["Applied", "Interview", "Offer", "Accepted", "Declined"]} },
             { field: 'source', headerName: 'Source', width: 150 },
         ],
-        defaultColDef: {
+            defaultColDef: {
             sortable: true,
-            filter: true,
-            editable: true
+                filter: true,
+                editable: true
         },
         readOnlyEdit: true,
-        onCellEditRequest: event => onCellEdit(event),
-    };
-
-    const [gridOptions, setGridOptions] = useState(gridOpt);
-
+            onCellEditRequest: event => onCellEdit(event),
+    });
 
     const chartOptions = {
         data: jobDataByMonth,
@@ -54,7 +52,7 @@ const Dash = () => {
         },
     };
 
-    const pieOptions = {
+    const statusPieOptions = {
         data: jobsStatusData,
         series: [
             {
@@ -67,6 +65,31 @@ const Dash = () => {
             fill: darkMode ? "color-mix(in srgb, #fff, #182230 97%)" : "#fff"
         },
     };
+
+    const sourcePieOptions = {
+        data: jobsSourceData,
+        series: [
+            {
+                type: 'pie',
+                angleKey: 'count',
+                legendItemKey: 'source'
+            }
+        ],
+        background: {
+            fill: darkMode ? "color-mix(in srgb, #fff, #182230 97%)" : "#fff"
+        },
+    };
+
+    const levelBarOptions = {
+        data: jobsLevelData,
+        series: [
+            {
+                type: "bar",
+                xKey: "level",
+                yKey: "count"
+            }
+        ]
+    }
 
     const cardClassname = darkMode ? "ag-theme-quartz-card-dark p-6 rounded-lg " : "p-6 ag-theme-quartz-card rounded-lg "
 
@@ -100,6 +123,8 @@ const Dash = () => {
     useEffect(() => {
         setJobDataByMonth(groupJobsByMonth(jobs));
         setJobsStatusData(groupJobsByStatus(jobs));
+        setJobsSourceData(groupJobsBySource(jobs));
+        setJobsLevelData(groupJobsByLevel(jobs));
         setGridOptions({
             rowData: jobs,
             columnDefs: [
@@ -162,36 +187,33 @@ const Dash = () => {
         }));
     }
 
-/*    const tableColumns = [
-        { field: 'jobTitle', headerName: 'Job Title', width: 200},
-        { field: 'jobLevel', headerName: 'Level', width: 150},
-        { field: 'industry', headerName: 'Industry', width: 150 },
-        { field: 'companyName', headerName: 'Company', width: 200},
-        { field: 'applicationDate', headerName: 'Applied', width: 150, editable: false},
-        { field: 'status', headerName: 'Status', width: 100, cellEditor: 'agSelectCellEditor', cellEditorParams: {values: ["Applied", "Interview", "Offer", "Accepted", "Declined"]} },
-        { field: 'source', headerName: 'Source', width: 150 },
-    ];*/
+    function groupJobsBySource(jobs) {
+        const groupedData = {};
 
-/*    function getGridOptions(jobs) {
-        return {
-            rowData: jobs,
-            columnDefs: [
-                { field: 'jobTitle', headerName: 'Job Title', width: 200},
-                { field: 'jobLevel', headerName: 'Level', width: 150},
-                { field: 'industry', headerName: 'Industry', width: 150 },
-                { field: 'companyName', headerName: 'Company', width: 200},
-                { field: 'applicationDate', headerName: 'Applied', width: 150, editable: false},
-                { field: 'status', headerName: 'Status', width: 100, cellEditor: 'agSelectCellEditor', cellEditorParams: {values: ["Applied", "Interview", "Offer", "Accepted", "Declined"]} },
-                { field: 'source', headerName: 'Source', width: 150 },
-            ],
-            defaultColDef: {
-                sortable: true,
-                filter: true,
-                editable: true
-            },
-            readOnlyEdit: true,
-        }
-    }*/
+        jobs.forEach(job => {
+            const source = job.source;
+            groupedData[source] = (groupedData[source] || 0) + 1;
+        });
+
+        return Object.entries(groupedData).map(([source, count]) => ({
+            source,
+            count,
+        }));
+    }
+
+    function groupJobsByLevel(jobs) {
+        const groupedData = {};
+
+        jobs.forEach(job => {
+            const level = job.jobLevel;
+            groupedData[level] = (groupedData[level] || 0) + 1;
+        });
+
+        return Object.entries(groupedData).map(([level, count]) => ({
+            level,
+            count,
+        }));
+    }
 
 
 
@@ -218,14 +240,14 @@ const Dash = () => {
                         className="grid auto-rows-min grid-cols-2 md:grid-cols-2 lg:grid-cols-4 grid-rows-8 md:grid-rows-8 lg:grid-rows-5 gap-6 text-white">
 
                         <div className={cardClassname + ""}>
-                            <div className="text-2xl font-semibold mb-1">{jobs.length}</div>
-                            <div className="text-sm font-medium text-gray-400">Total Applications</div>
+                            <div className="text-5xl font-semibold mb-1">{jobs.length}</div>
+                            <div className="text-lg font-medium text-gray-400">Total Applications</div>
                         </div>
 
-                        <div className={cardClassname + ""}>
+                        <div className={cardClassname + "items-center"}>
                             <div
-                                className="text-2xl font-semibold mb-1">{jobs.filter(value => value.status !== "Declined" && value.status !== "Rejected").length}</div>
-                            <div className="text-sm font-medium text-gray-400">Active Applications</div>
+                                className="text-5xl font-semibold mb-1">{jobs.filter(value => value.status !== "Declined" && value.status !== "Rejected").length}</div>
+                            <div className="text-lg font-medium text-gray-400">Active Applications</div>
                         </div>
 
                         <div className={cardClassname + "col-span-2 md:row-span-1"}>
@@ -234,26 +256,38 @@ const Dash = () => {
                         </div>
 
                         <div className={cardClassname + "row-span-2 col-span-2 lg:col-span-3"}>
+                            <div className="text-start text-2xl font-semibold mb-1">Frequency</div>
+                            <div className="text-start text-sm font-medium text-gray-400">Number of job applications submitted each month</div>
                             <AgCharts options={
                                 chartOptions
                             }/>
                         </div>
 
                         <div className={cardClassname + "col-span-1 row-span-2 md:col-span-1"}>
+                            <div className="text-start text-2xl font-semibold mb-1">Status</div>
+                            <div className="text-start text-sm font-medium text-gray-400">The distribution of the state of all applications
+                            </div>
                             <AgCharts options={
-                                pieOptions
+                                statusPieOptions
                             }/>
                         </div>
 
 
                         <div className={cardClassname + "col-span-1 row-span-2 md:col-span-1 lg:col-span-2"}>
-                            <div className="text-2xl font-semibold mb-1">100</div>
-                            <div className="text-sm font-medium text-gray-400">Blogs</div>
+                            <div className="text-start text-2xl font-semibold mb-1">Source</div>
+                            <div className="text-start text-sm font-medium text-gray-400">The distribution of the sources of the job listings you apply for</div>
+                            <AgCharts options={
+                                sourcePieOptions
+                            }/>
                         </div>
 
                         <div className={cardClassname + "row-span-2 col-span-2 md:row-span-2"}>
-                            <div className="text-2xl font-semibold mb-1">Special Box</div>
-                            <div className="text-sm font-medium text-gray-400">This box spans two columns</div>
+                            <div className="text-start text-2xl font-semibold mb-1">Level</div>
+                            <div className="text-start text-sm font-medium text-gray-400">The levels of the roles you are applying for
+                            </div>
+                            <AgCharts options={
+                                levelBarOptions
+                            }/>
                         </div>
                     </div>
                     <div className="bg-white mt-6 rounded-xl">
