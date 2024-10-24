@@ -22,4 +22,16 @@ const addJob = async (jobData, token) => {
     return response.data
 }
 
-export default { fetchJobs, addJob };
+const updateJob = async (jobData, editedColumn, newValue, token) => {
+    console.log("token being used to update job: ", token);
+    jobData[editedColumn] = newValue;
+    const response = await axios.put(`${API_URL}/jobs/update`, jobData, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    console.log(response.data);
+    return response.data;
+}
+
+export default { fetchJobs, addJob, updateJob };

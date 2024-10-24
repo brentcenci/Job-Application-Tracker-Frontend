@@ -221,7 +221,12 @@ const Dash = () => {
 
 
     function onCellEdit(event) {
-        console.log("Edit request: ", event)
+        console.log("Edit request: ", event);
+        console.log("JobId: ", event.data.jobId)
+        console.log("Old Value: ", event.oldValue, ", New Value: ", event.value);
+        jobService.updateJob(event.data, event.column.colId, event.value, token).then((response) => {
+            console.log("Updated job:", response);
+        })
     }
 
 
