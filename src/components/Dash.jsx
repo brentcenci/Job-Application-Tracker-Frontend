@@ -98,15 +98,19 @@ const Dash = () => {
 
     useEffect(() => {
         if (isAuthenticated) {
-            console.log("Fetching jobs with token:", token);
-            jobService.fetchJobs(token).then((response) => {
-                console.log("Fetched jobs:", response);
-                setJobs(response);
-            }).catch((error) => {
-                console.error("Error fetching jobs:", error);
-            });
+            fetchJobs()
         }
     }, [token, isAuthenticated]);
+
+    const fetchJobs = () => {
+        console.log("Fetching jobs with token:", token);
+        jobService.fetchJobs(token).then((response) => {
+            console.log("Fetched jobs:", response);
+            setJobs(response);
+        }).catch((error) => {
+            console.error("Error fetching jobs:", error);
+        });
+    }
 
     const handleAddJob = (jobData) => {
         console.log("token from handle job is", token)
@@ -226,6 +230,13 @@ const Dash = () => {
         console.log("Old Value: ", event.oldValue, ", New Value: ", event.value);
         jobService.updateJob(event.data, event.column.colId, event.value, token).then((response) => {
             console.log("Updated job:", response);
+            console.log("Fetching jobs with token:", token);
+            jobService.fetchJobs(token).then((response) => {
+                console.log("Fetched jobs:", response);
+                setJobs(response);
+            }).catch((error) => {
+                console.error("Error fetching jobs:", error);
+            });
         })
     }
 
