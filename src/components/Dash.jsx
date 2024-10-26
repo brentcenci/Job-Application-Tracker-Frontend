@@ -10,17 +10,20 @@ import 'ag-grid-community/styles/ag-theme-quartz.css'
 
 const Dash = () => {
 
+    let gridApi;
+
     const {logout, token, isAuthenticated} = useAuth()
     const [jobs, setJobs] = useState([])
     const [modalOpen, setModalOpen] = useState(false);
     const [darkMode, setDarkMode] = useState(false)
+    const [searchTextValue, setSearchTextValue] = useState("");
     const [jobDataByMonth, setJobDataByMonth] = useState(groupJobsByMonth(jobs));
     const [jobsStatusData, setJobsStatusData] = useState(groupJobsByStatus(jobs));
     const [jobsSourceData, setJobsSourceData] = useState(groupJobsBySource(jobs));
     const [jobsLevelData, setJobsLevelData] = useState(groupJobsByLevel(jobs));
     const [gridOptions, setGridOptions] = useState({
         rowData: jobs,
-            columnDefs: [
+        columnDefs: [
             { field: 'jobTitle', headerName: 'Job Title', width: 200},
             { field: 'jobLevel', headerName: 'Level', width: 150},
             { field: 'industry', headerName: 'Industry', width: 150 },
@@ -37,6 +40,10 @@ const Dash = () => {
         readOnlyEdit: true,
             onCellEditRequest: event => onCellEdit(event),
     });
+
+    useEffect(() => {
+        console.log(searchTextValue)
+    }, [searchTextValue]);
 
     const chartOptions = {
         data: jobDataByMonth,
@@ -311,12 +318,21 @@ const Dash = () => {
                                 }/>
                             </div>
                         </div>
-                        <div className="bg-white mt-6 rounded-xl">
+                        <div className={`${darkMode ? 'ag-theme-quartz-dark' : 'ag-theme-quartz '} mt-20 flex flex-row space-x-2`}>
+                            <input
+                                placeholder="Search your applications"
+                                className={`w-full rounded-xl ${darkMode ? 'bg-gray-800 ag-theme-quartz-dark ' : 'ag-theme-quartz '} rounded-xl p-4`}
+                                value={searchTextValue}
+                                onInput={e => setSearchTextValue(e.target.value)}
+                            />
+                        </div>
+                        <div className="mt-6 rounded-xl">
                             <div
                                 className={`${darkMode ? 'ag-theme-quartz-dark' : 'ag-theme-quartz'}`}
                                 style={{height: '500px', width: '100%'}}
                             >
                                 <AgGridReact
+                                    quickFilterText={searchTextValue}
                                     gridOptions={gridOptions}
                                     rowData={jobs}
                                 />
