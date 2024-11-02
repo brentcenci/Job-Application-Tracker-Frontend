@@ -9,13 +9,16 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css'
 
 const Dash = () => {
+    const [darkMode, setDarkMode] = useState(false)
 
-    let gridApi;
+    let myButton = () => {
+        return <button className= {darkMode ? "py-1 text-sm text-white" : "py-1 text-sm bg-red-400"} onClick={() => window.alert('Deleted Row')}>Delete</button>;
+    }
 
     const {logout, token, isAuthenticated} = useAuth()
     const [jobs, setJobs] = useState([])
     const [modalOpen, setModalOpen] = useState(false);
-    const [darkMode, setDarkMode] = useState(false)
+
     const [searchTextValue, setSearchTextValue] = useState("");
     const [jobDataByMonth, setJobDataByMonth] = useState(groupJobsByMonth(jobs));
     const [jobsStatusData, setJobsStatusData] = useState(groupJobsByStatus(jobs));
@@ -31,6 +34,7 @@ const Dash = () => {
             { field: 'applicationDate', headerName: 'Applied', width: 150, editable: false},
             { field: 'status', headerName: 'Status', width: 100, cellEditor: 'agSelectCellEditor', cellEditorParams: {values: ["Applied", "Interview", "Offer", "Accepted", "Declined"]} },
             { field: 'source', headerName: 'Source', width: 150 },
+            { headerName: 'Delete', cellRenderer: myButton }
         ],
             defaultColDef: {
             sortable: true,
@@ -147,6 +151,7 @@ const Dash = () => {
                 { field: 'applicationDate', headerName: 'Applied', width: 150, editable: false},
                 { field: 'status', headerName: 'Status', width: 100, cellEditor: 'agSelectCellEditor', cellEditorParams: {values: ["Applied", "Interview", "Offer", "Accepted", "Declined"]} },
                 { field: 'source', headerName: 'Source', width: 150 },
+                { headerName: 'Delete', cellRenderer: myButton }
             ],
             defaultColDef: {
                 sortable: true,
