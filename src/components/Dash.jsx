@@ -121,16 +121,14 @@ const Dash = () => {
 
     const handleAddJob = (jobData) => {
         console.log("token from handle job is", token)
-        jobService.addJob(jobData, token).then((response) => {
-            if (response.status === 200) {
-                console.log("Fetching jobs with token:", token);
-                jobService.fetchJobs(token).then((response) => {
-                    console.log("Fetched jobs:", response);
-                    setJobs(response);
-                }).catch((error) => {
-                    console.error("Error fetching jobs:", error);
-                });
-            }
+        jobService.addJob(jobData, token).then(() => {
+            console.log("Fetching jobs with token:", token);
+            jobService.fetchJobs(token).then((response) => {
+                console.log("Fetched jobs:", response);
+                setJobs(response);
+            }).catch((error) => {
+                console.error("Error fetching jobs:", error);
+            });
         })
     };
 
