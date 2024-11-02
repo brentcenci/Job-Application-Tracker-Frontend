@@ -1,8 +1,8 @@
 import axios from "axios";
-import constants from "@/src/services/constants.js";
+import constant from "@/src/services/constant.js";
 
 const fetchJobs = async (token) => {
-    const response =  await axios.get(`${constants.API_URL}/jobs`, {
+    const response =  await axios.get(`${constant.API_URL}/jobs`, {
         headers: {
             Authorization: `Bearer ${token}`,
         }
@@ -12,7 +12,7 @@ const fetchJobs = async (token) => {
 
 const addJob = async (jobData, token) => {
     console.log("token being used to add job: ", token)
-    const response = await axios.post(`${constants.API_URL}/jobs`, jobData, {
+    const response = await axios.post(`${constant.API_URL}/jobs`, jobData, {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -24,7 +24,7 @@ const addJob = async (jobData, token) => {
 const updateJob = async (jobData, editedColumn, newValue, token) => {
     console.log("token being used to update job: ", token);
     jobData[editedColumn] = newValue;
-    const response = await axios.put(`${constants.API_URL}/jobs/update`, jobData, {
+    const response = await axios.put(`${constant.API_URL}/jobs/update`, jobData, {
         headers: {
             Authorization: `Bearer ${token}`
         }
