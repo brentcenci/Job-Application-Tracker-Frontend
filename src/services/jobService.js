@@ -33,6 +33,17 @@ const updateJob = async (jobData, editedColumn, newValue, token) => {
     return response.data;
 }
 
+const deleteJob = async (jobData, token) => {
+    console.log("token being used to delete job: ", token);
+    const response = await axios.put(`${constant.API_URL}/jobs/delete`, jobData, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    console.log(response.data);
+    return response.data;
+}
 
 
-export default { fetchJobs, addJob, updateJob };
+
+export default { fetchJobs, addJob, updateJob, deleteJob };

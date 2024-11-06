@@ -1,6 +1,4 @@
 import {useAuth} from "../services/authState.jsx";
-import Login from "./Login.jsx";
-import Dashboard from "./Dashboard.jsx";
 import AuthPage from "@/src/components/AuthPage.jsx";
 import Dash from "@/src/components/Dash.jsx";
 
