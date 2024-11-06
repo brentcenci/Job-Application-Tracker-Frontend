@@ -11,8 +11,21 @@ import 'ag-grid-community/styles/ag-theme-quartz.css'
 const Dash = () => {
     const [darkMode, setDarkMode] = useState(false)
 
-    let myButton = () => {
-        return <button className= {darkMode ? "py-1 text-sm text-white" : "py-1 text-sm bg-red-400"} onClick={() => window.alert('Deleted Row')}>Delete</button>;
+    let myButton = (params) => {
+        return <button className= {darkMode ? "py-1 text-sm text-white" : "py-1 text-sm bg-red-400"} onClick={() => {
+            window.alert('Deleted Row')
+            jobService.deleteJob(params.data, token).then((response) => {
+                console.log("Delete Job response:", response)
+                jobService.fetchJobs(token).then((response) => {
+                    console.log("Fetched jobs:", response);
+                    setJobs(response);
+                }).catch((error) => {
+                    console.error("Error fetching jobs:", error);
+                });
+            }).catch((error) => {
+                console.log("Delete Job error:", error);
+            })
+        }}>Delete</button>;
     }
 
     const {logout, token, isAuthenticated} = useAuth()
