@@ -47,7 +47,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
 
     return (
         <div className="z-10">
-            <div className="z-10 flex justify-center">
+            <div className="z-10 flex justify-center bg-gray-800">
                 <div className="modal-content ">
                 <span className="close" onClick={onClose}>
                     &times;
