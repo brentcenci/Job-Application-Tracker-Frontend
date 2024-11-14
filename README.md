@@ -1,8 +1,6 @@
-# React + Vite
+# Job Application ReactJS Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the site dashboard to interact with and view job applications for my Job Application Tracker project.
+It is built using Vite, React, and Tailwind, with Axios for network connection requests to my backend API.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+It is hosted live at: www.placeholder.com.
