@@ -1,5 +1,4 @@
 # Job Application ReactJS Dashboard
-<hr>
 
 ## Overview 📝📌
 
