@@ -1,5 +1,5 @@
 import jobService from "../services/jobService.js";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const AddJobModal = ({ onAdd, onClose }) => {
     const [jobTitle, setJobTitle] = useState("");
@@ -45,7 +45,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
         }
     };
 
-    return (
+    /*return (
         <div className="z-10">
             <div className="z-10 flex justify-center bg-gray-800">
                 <div className="modal-content ">
@@ -130,6 +130,69 @@ const AddJobModal = ({ onAdd, onClose }) => {
                 </div>
             </div>
 
+        </div>
+    );*/
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+                <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-2xl font-semibold">Add Job Application</h2>
+                    <button
+                        className="bg-red-500 text-white hover:bg-red-600 text-2xl font-bold py-1 px-3"
+                        onClick={onClose}
+                    >
+                        &times;
+                    </button>
+                </div>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                        <label className="block font-medium mb-1">Job Title</label>
+                        <input
+                            type="text"
+                            value={jobTitle}
+                            onChange={(e) => setJobTitle(e.target.value)}
+                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="block font-medium mb-1">Company Name</label>
+                        <input
+                            type="text"
+                            value={companyName}
+                            onChange={(e) => setCompanyName(e.target.value)}
+                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="block font-medium mb-1">Job Level</label>
+                        <input
+                            type="text"
+                            value={jobLevel}
+                            onChange={(e) => setJobLevel(e.target.value)}
+                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="block font-medium mb-1">Status</label>
+                        <input
+                            type="text"
+                            value={status}
+                            onChange={(e) => setStatus(e.target.value)}
+                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        className="w-full py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700"
+                    >
+                        Add Job
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };

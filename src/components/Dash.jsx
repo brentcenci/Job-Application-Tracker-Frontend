@@ -268,7 +268,9 @@ const Dash = () => {
     return(
         <>
             <div className={`${darkMode ? "bg-gray-700" : "bg-gray-200"} " w-full h-full"`}>
-                <div className={modalOpen ? "block bg-black bg-opacity-20 w-full h-full z-10 fixed" : ""}>
+                {modalOpen && <AddJobModal onAdd={handleAddJob} onClose={closeModal}/>}
+                {/*"block bg-black bg-opacity-20 w-full h-full z-10 fixed"*/}
+                <div className={modalOpen ? "" : ""}>
                     <div className={`${darkMode ? "ag-theme-quartz-card-dark" : "ag-theme-quartz-card"} w-full h-20 flex justify-between items-center p-6`}>
                         <h1 className="text-3xl">Your Dashboard</h1>
                         <div className="text-gray-600 space-x-2">
@@ -277,7 +279,7 @@ const Dash = () => {
                             <button onClick={logout}>Logout</button>
                         </div>
                     </div>
-                    {modalOpen && <AddJobModal onAdd={handleAddJob} onClose={closeModal}/>}
+                    {/*{modalOpen && <AddJobModal onAdd={handleAddJob} onClose={closeModal}/>}*/}
                     <div className="p-6 max-w-screen-xl mx-auto">
 
                         <div
