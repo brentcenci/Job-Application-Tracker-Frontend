@@ -176,6 +176,26 @@ const AddJobModal = ({ onAdd, onClose }) => {
                         />
                     </div>
                     <div>
+                        <label className="block font-medium mb-1">Industry</label>
+                        <input
+                            type="text"
+                            value={industry}
+                            onChange={(e) => setIndustry(e.target.value)}
+                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="block font-medium mb-1">Application Date</label>
+                        <input
+                            type="date"
+                            value={applicationDate}
+                            onChange={(e) => setApplicationDate(e.target.value)}
+                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+                    <div>
                         <label className="block font-medium mb-1">Status</label>
                         <input
                             type="text"
@@ -183,6 +203,25 @@ const AddJobModal = ({ onAdd, onClose }) => {
                             onChange={(e) => setStatus(e.target.value)}
                             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             required
+                        />
+                    </div>
+                    <div>
+                        <label className="block font-medium mb-1">Source</label>
+                        <input
+                            type="text"
+                            value={source}
+                            onChange={(e) => setSource(e.target.value)}
+                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="block font-medium mb-1">URL</label>
+                        <input
+                            type="text"
+                            value={url}
+                            onChange={(e) => setUrl(e.target.value)}
+                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
                     <button
