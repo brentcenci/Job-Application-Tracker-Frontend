@@ -134,7 +134,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
     );*/
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm overflow-y-auto">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-2xl font-semibold">Add Job Application</h2>
                     <button
@@ -144,14 +144,14 @@ const AddJobModal = ({ onAdd, onClose }) => {
                         &times;
                     </button>
                 </div>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-2">
                     <div>
                         <label className="block font-medium mb-1">Job Title</label>
                         <input
                             type="text"
                             value={jobTitle}
                             onChange={(e) => setJobTitle(e.target.value)}
-                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             required
                         />
                     </div>
@@ -161,7 +161,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
                             type="text"
                             value={companyName}
                             onChange={(e) => setCompanyName(e.target.value)}
-                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             required
                         />
                     </div>
@@ -171,7 +171,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
                             type="text"
                             value={jobLevel}
                             onChange={(e) => setJobLevel(e.target.value)}
-                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             required
                         />
                     </div>
@@ -181,7 +181,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
                             type="text"
                             value={industry}
                             onChange={(e) => setIndustry(e.target.value)}
-                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             required
                         />
                     </div>
@@ -191,7 +191,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
                             type="date"
                             value={applicationDate}
                             onChange={(e) => setApplicationDate(e.target.value)}
-                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             required
                         />
                     </div>
@@ -201,7 +201,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
                             type="text"
                             value={status}
                             onChange={(e) => setStatus(e.target.value)}
-                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             required
                         />
                     </div>
@@ -211,7 +211,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
                             type="text"
                             value={source}
                             onChange={(e) => setSource(e.target.value)}
-                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             required
                         />
                     </div>
@@ -221,7 +221,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
                             type="text"
                             value={url}
                             onChange={(e) => setUrl(e.target.value)}
-                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
                     <button
