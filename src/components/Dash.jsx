@@ -193,14 +193,15 @@ const Dash = () => {
 
         jobs.forEach(job => {
             const date = new Date(job.applicationDate);
-            const monthYear = `${date.getFullYear()}-${date.getMonth() + 1}`; // Format: YYYY-MM
+            const monthYear = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
             groupedData[monthYear] = (groupedData[monthYear] || 0) + 1;
         });
 
         return Object.entries(groupedData).map(([month, count]) => ({
             month,
             count,
-        }));
+        }))
+            .sort((a, b) => a.month.localeCompare(b.month));
     }
 
     function groupJobsByStatus(jobs) {
