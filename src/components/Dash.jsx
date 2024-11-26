@@ -267,7 +267,7 @@ const Dash = () => {
 
     return(
         <>
-            <div className={`${darkMode ? "bg-gray-700" : "bg-gray-200"} " w-full h-full"`}>
+            <div className={`${darkMode ? "bg-gray-700" : "bg-gray-200"} " w-screen h-full"`}>
                 {modalOpen && <AddJobModal onAdd={handleAddJob} onClose={closeModal}/>}
                 {/*"block bg-black bg-opacity-20 w-full h-full z-10 fixed"*/}
                 <div className={modalOpen ? "" : ""}>
