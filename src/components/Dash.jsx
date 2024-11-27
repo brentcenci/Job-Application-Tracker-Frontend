@@ -34,6 +34,7 @@ const Dash = () => {
 
     const [searchTextValue, setSearchTextValue] = useState("");
     const [jobDataByMonth, setJobDataByMonth] = useState(groupJobsByMonth(jobs));
+    const [jobsIndustryData, setJobsIndustryData] = useState(groupJobsByIndustry(jobs));
     const [jobsStatusData, setJobsStatusData] = useState(groupJobsByStatus(jobs));
     const [jobsSourceData, setJobsSourceData] = useState(groupJobsBySource(jobs));
     const [jobsLevelData, setJobsLevelData] = useState(groupJobsByLevel(jobs));
@@ -92,6 +93,34 @@ const Dash = () => {
             fill: darkMode ? "color-mix(in srgb, #fff, #182230 97%)" : "#fff"
         },
     };
+
+    const industryPieOptions = {
+        data: jobsIndustryData,
+        series: [
+            {
+                type: 'pie',
+                angleKey: 'count',
+                legendItemKey: 'industry'
+            }
+        ],
+        background: {
+            fill: darkMode ? "color-mix(in srgb, #fff, #182230 97%)" : "#fff"
+        },
+    };
+
+    const industryBarOptions = {
+        data: jobsIndustryData,
+        series: [
+            {
+                type: "bar",
+                xKey: "industry",
+                yKey: "count"
+            }
+        ],
+        background: {
+            fill: darkMode ? "color-mix(in srgb, #fff, #182230 97%)" : "#fff"
+        },
+    }
 
     const statusPieOptions = {
         data: jobsStatusData,
@@ -168,6 +197,7 @@ const Dash = () => {
 
     useEffect(() => {
         setJobDataByMonth(groupJobsByMonth(jobs));
+        setJobsIndustryData(groupJobsByIndustry(jobs))
         setJobsStatusData(groupJobsByStatus(jobs));
         setJobsSourceData(groupJobsBySource(jobs));
         setJobsLevelData(groupJobsByLevel(jobs));
@@ -231,6 +261,20 @@ const Dash = () => {
 
         return Object.entries(groupedData).map(([status, count]) => ({
             status,
+            count,
+        }));
+    }
+
+    function groupJobsByIndustry(jobs) {
+        const groupedData = {};
+
+        jobs.forEach(job => {
+            const industry = job.industry;
+            groupedData[industry] = (groupedData[industry] || 0) + 1;
+        });
+
+        return Object.entries(groupedData).map(([industry, count]) => ({
+            industry,
             count,
         }));
     }
@@ -315,13 +359,23 @@ const Dash = () => {
                             </div>
 
                             <div className={cardClassname + "col-span-2 md:row-span-1"}>
-                                <div className="text-2xl font-semibold mb-1">2</div>
+                                <div className="text-2xl font-semibold mb-1">Helloooooooo</div>
                                 <div className="text-sm font-medium text-gray-400">Users</div>
                             </div>
-
+                            {/*<div className={cardClassname + "col-span-2 row-span-1"}>
+                                <div className="text-start text-2xl font-semibold mb-1">Industry</div>
+                                <div className="text-start text-sm font-medium text-gray-400">Industries
+                                </div>
+                                <AgCharts options={
+                                    industryBarOptions
+                                }/>
+                            </div>
+*/}
                             <div className={cardClassname + "row-span-2 col-span-2 lg:col-span-3"}>
                                 <div className="text-start text-2xl font-semibold mb-1">Frequency</div>
-                                <div className="text-start text-sm font-medium text-gray-400">Number of job applications submitted each month</div>
+                                <div className="text-start text-sm font-medium text-gray-400">Number of job applications
+                                    submitted each month
+                                </div>
                                 <AgCharts options={
                                     chartOptions
                                 }/>
@@ -329,7 +383,8 @@ const Dash = () => {
 
                             <div className={cardClassname + "col-span-1 row-span-2 md:col-span-1"}>
                                 <div className="text-start text-2xl font-semibold mb-1">Status</div>
-                                <div className="text-start text-sm font-medium text-gray-400">The distribution of the state of all applications
+                                <div className="text-start text-sm font-medium text-gray-400">The distribution of the
+                                    state of all applications
                                 </div>
                                 <AgCharts options={
                                     statusPieOptions
@@ -339,7 +394,9 @@ const Dash = () => {
 
                             <div className={cardClassname + "col-span-1 row-span-2 md:col-span-1 lg:col-span-2"}>
                                 <div className="text-start text-2xl font-semibold mb-1">Source</div>
-                                <div className="text-start text-sm font-medium text-gray-400">The distribution of the sources of the job listings you apply for</div>
+                                <div className="text-start text-sm font-medium text-gray-400">The distribution of the
+                                    sources of the job listings you apply for
+                                </div>
                                 <AgCharts options={
                                     sourcePieOptions
                                 }/>
@@ -347,14 +404,16 @@ const Dash = () => {
 
                             <div className={cardClassname + "row-span-2 col-span-2 md:row-span-2"}>
                                 <div className="text-start text-2xl font-semibold mb-1">Level</div>
-                                <div className="text-start text-sm font-medium text-gray-400">The levels of the roles you are applying for
+                                <div className="text-start text-sm font-medium text-gray-400">The levels of the roles
+                                    you are applying for
                                 </div>
                                 <AgCharts options={
                                     levelBarOptions
                                 }/>
                             </div>
                         </div>
-                        <div className={`${darkMode ? 'ag-theme-quartz-dark' : 'ag-theme-quartz '} mt-20 flex flex-row space-x-2`}>
+                        <div
+                            className={`${darkMode ? 'ag-theme-quartz-dark' : 'ag-theme-quartz '} mt-20 flex flex-row space-x-2`}>
                             <input
                                 placeholder="Search your applications"
                                 className={`w-full rounded-xl ${darkMode ? 'bg-gray-800 ag-theme-quartz-dark ' : 'ag-theme-quartz '} rounded-xl p-4`}
