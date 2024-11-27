@@ -71,6 +71,23 @@ const Dash = () => {
                 yKey: "count"
             }
         ],
+        axes: [
+            {
+                type: "number",
+                position: "left",
+                min: 0,
+                title: {
+                    text: "Number of Applications Submitted"
+                }
+            },
+            {
+                type: "category",
+                position: "bottom",
+                title: {
+                    text: "Month of Year (in YYYY-MM)"
+                }
+            }
+        ],
         background: {
             fill: darkMode ? "color-mix(in srgb, #fff, #182230 97%)" : "#fff"
         },
