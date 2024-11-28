@@ -359,8 +359,8 @@ const Dash = () => {
                             </div>
 
                             <div className={cardClassname + "col-span-2 md:row-span-1"}>
-                                <div className="text-2xl font-semibold mb-1">Helloooooooo</div>
-                                <div className="text-sm font-medium text-gray-400">Users</div>
+                                <div className="text-2xl font-semibold mb-1">Industries</div>
+                                <div className="text-sm font-medium text-gray-400"></div>
                             </div>
                             {/*<div className={cardClassname + "col-span-2 row-span-1"}>
                                 <div className="text-start text-2xl font-semibold mb-1">Industry</div>
