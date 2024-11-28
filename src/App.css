@@ -9,6 +9,12 @@
 /*  text-align: center;*/
 }
 
+body, #root {
+  @apply w-full h-full overflow-x-hidden;
+  margin: 0;
+  padding: 0;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
