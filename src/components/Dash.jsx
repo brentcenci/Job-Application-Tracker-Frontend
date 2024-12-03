@@ -119,7 +119,7 @@ const Dash = () => {
         ],
         background: {
             fill: darkMode ? "color-mix(in srgb, #fff, #182230 97%)" : "#fff"
-        },
+        }
     }
 
     const statusPieOptions = {
@@ -345,33 +345,13 @@ const Dash = () => {
                     <div className="p-6 max-w-screen-xl mx-auto">
 
                         <div
-                            className="grid auto-rows-min grid-cols-2 md:grid-cols-2 lg:grid-cols-4 grid-rows-8 md:grid-rows-8 lg:grid-rows-5 gap-6 text-white">
+                            className="grid auto-rows-min grid-cols-2 md:grid-cols-2 lg:grid-cols-4 grid-rows-5 md:grid-rows-5 lg:grid-rows-4 gap-6 text-white">
 
                             <div className={cardClassname + ""}>
                                 <div className="text-5xl font-semibold mb-1">{jobs.length}</div>
-                                <div className="text-lg font-medium text-gray-400">Total Applications</div>
+                                <div className="text-lg font-medium text-gray-400">Applications you have logged on this app</div>
                             </div>
-
-                            <div className={cardClassname + "items-center"}>
-                                <div
-                                    className="text-5xl font-semibold mb-1">{jobs.filter(value => value.status !== "Declined" && value.status !== "Rejected").length}</div>
-                                <div className="text-lg font-medium text-gray-400">Active Applications</div>
-                            </div>
-
-                            <div className={cardClassname + "col-span-2 md:row-span-1"}>
-                                <div className="text-2xl font-semibold mb-1">Industries</div>
-                                <div className="text-sm font-medium text-gray-400"></div>
-                            </div>
-                            {/*<div className={cardClassname + "col-span-2 row-span-1"}>
-                                <div className="text-start text-2xl font-semibold mb-1">Industry</div>
-                                <div className="text-start text-sm font-medium text-gray-400">Industries
-                                </div>
-                                <AgCharts options={
-                                    industryBarOptions
-                                }/>
-                            </div>
-*/}
-                            <div className={cardClassname + "row-span-2 col-span-2 lg:col-span-3"}>
+                            <div className={cardClassname + "hidden lg:block row-span-2 col-span-2 lg:col-span-3"}>
                                 <div className="text-start text-2xl font-semibold mb-1">Frequency</div>
                                 <div className="text-start text-sm font-medium text-gray-400">Number of job applications
                                     submitted each month
@@ -381,7 +361,37 @@ const Dash = () => {
                                 }/>
                             </div>
 
-                            <div className={cardClassname + "col-span-1 row-span-2 md:col-span-1"}>
+                            <div className={cardClassname + "items-center"}>
+                                <div
+                                    className="text-5xl font-semibold mb-1">{jobs.filter(value => value.status !== "Declined" && value.status !== "Rejected").length}</div>
+                                <div className="text-lg font-medium text-gray-400">Applications that are currently active and not declined or rejected</div>
+                            </div>
+
+
+                            {/*<div className={cardClassname + "col-span-2 md:row-span-1"}>
+                                <div className="text-2xl font-semibold mb-1">Industries</div>
+                                <div className="text-sm font-medium text-gray-400"></div>
+                            </div>*/}
+                            <div className={cardClassname + "col-span-2 row-span-2"}>
+                                <div className="text-start text-2xl font-semibold mb-1">Industry</div>
+                                <div className="text-start text-sm font-medium text-gray-400">The distribution of industries you have applied for
+                                </div>
+                                <AgCharts options={
+                                    industryBarOptions
+                                }/>
+                            </div>
+
+                            <div className={cardClassname + "lg:hidden row-span-2 col-span-2 lg:col-span-3"}>
+                                <div className="text-start text-2xl font-semibold mb-1">Frequency</div>
+                                <div className="text-start text-sm font-medium text-gray-400">Number of job applications
+                                    submitted each month
+                                </div>
+                                <AgCharts options={
+                                    chartOptions
+                                }/>
+                            </div>
+
+                            <div className={cardClassname + "col-span-1 row-span-2 md:col-span-1 lg:col-span-2"}>
                                 <div className="text-start text-2xl font-semibold mb-1">Status</div>
                                 <div className="text-start text-sm font-medium text-gray-400">The distribution of the
                                     state of all applications
@@ -402,7 +412,7 @@ const Dash = () => {
                                 }/>
                             </div>
 
-                            <div className={cardClassname + "row-span-2 col-span-2 md:row-span-2"}>
+                            <div className={cardClassname + "row-span-2 col-span-2 row-span-2"}>
                                 <div className="text-start text-2xl font-semibold mb-1">Level</div>
                                 <div className="text-start text-sm font-medium text-gray-400">The levels of the roles
                                     you are applying for
