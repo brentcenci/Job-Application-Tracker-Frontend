@@ -8,6 +8,7 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css'
 import {rgb} from "d3-color";
+import Loading from "@/src/components/Loading.jsx";
 
 const Dash = () => {
     const [darkMode, setDarkMode] = useState(false)
@@ -15,16 +16,20 @@ const Dash = () => {
     let myButton = (params) => {
         return <button className= {darkMode ? "py-1 text-sm text-white" : "py-1 text-sm bg-red-400"} onClick={() => {
             window.alert('Deleted Row')
+            setIsLoading(true);
             jobService.deleteJob(params.data, token).then((response) => {
                 console.log("Delete Job response:", response)
                 jobService.fetchJobs(token).then((response) => {
                     console.log("Fetched jobs:", response);
                     setJobs(response);
+                    setIsLoading(false);
                 }).catch((error) => {
                     console.error("Error fetching jobs:", error);
+                    setIsLoading(false);
                 });
             }).catch((error) => {
                 console.log("Delete Job error:", error);
+                setIsLoading(false);
             })
         }}>Delete</button>;
     }
@@ -32,6 +37,7 @@ const Dash = () => {
     const {logout, token, isAuthenticated} = useAuth()
     const [jobs, setJobs] = useState([])
     const [modalOpen, setModalOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [searchTextValue, setSearchTextValue] = useState("");
     const [jobDataByMonth, setJobDataByMonth] = useState(groupJobsByMonth(jobs));
@@ -175,24 +181,30 @@ const Dash = () => {
     }, [token, isAuthenticated]);
 
     const fetchJobs = () => {
+        setIsLoading(true);
         console.log("Fetching jobs with token:", token);
         jobService.fetchJobs(token).then((response) => {
             console.log("Fetched jobs:", response);
+            setIsLoading(false);
             setJobs(response);
         }).catch((error) => {
             console.error("Error fetching jobs:", error);
+            setIsLoading(false);
         });
     }
 
     const handleAddJob = (jobData) => {
         console.log("token from handle job is", token)
         jobService.addJob(jobData, token).then(() => {
+            setIsLoading(true)
             console.log("Fetching jobs with token:", token);
             jobService.fetchJobs(token).then((response) => {
                 console.log("Fetched jobs:", response);
+                setIsLoading(false);
                 setJobs(response);
             }).catch((error) => {
                 console.error("Error fetching jobs:", error);
+                setIsLoading(false);
             });
         })
     };
@@ -318,11 +330,14 @@ const Dash = () => {
         jobService.updateJob(event.data, event.column.colId, event.value, token).then((response) => {
             console.log("Updated job:", response);
             console.log("Fetching jobs with token:", token);
+            setIsLoading(true);
             jobService.fetchJobs(token).then((response) => {
+                setIsLoading(false);
                 console.log("Fetched jobs:", response);
                 setJobs(response);
             }).catch((error) => {
                 console.error("Error fetching jobs:", error);
+                setIsLoading(false);
             });
         })
     }
@@ -333,13 +348,14 @@ const Dash = () => {
         <>
             <div className={`${darkMode ? "bg-gray-700" : "bg-gray-200"} " w-screen h-full"`}>
                 {modalOpen && <AddJobModal onAdd={handleAddJob} onClose={closeModal}/>}
+                {isLoading && <Loading />}
                 {/*"block bg-black bg-opacity-20 w-full h-full z-10 fixed"*/}
                 <div className={modalOpen ? "" : ""}>
                     <div className={`${darkMode ? "ag-theme-quartz-card-dark" : "ag-theme-quartz-card"} w-full h-20 flex justify-between items-center p-6`}>
                         <h1 className="text-3xl">Your Dashboard</h1>
                         <div className="text-gray-600 space-x-2 flex justify-between items-center">
                             <button className={" bg-blue-700 text-white h-12"} onClick={openModal}>Add New +</button>
-                            <button className={buttonClassname} onClick={toggleDarkMode}>{darkMode ?
+                            <button className={buttonClassname + ""} onClick={toggleDarkMode}>{darkMode ?
                                 <svg xmlns="http://www.w3.org/2000/svg" width="66" height="66" viewBox="0 0 24 24"
                                      className="duoicon duoicon-sun size-8" style={{color: "gold"}}>
                                     <path fill="currentColor"
