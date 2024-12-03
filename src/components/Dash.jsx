@@ -7,6 +7,7 @@ import {AgGridReact} from "ag-grid-react";
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css'
+import {rgb} from "d3-color";
 
 const Dash = () => {
     const [darkMode, setDarkMode] = useState(false)
@@ -164,7 +165,8 @@ const Dash = () => {
         },
     }
 
-    const cardClassname = darkMode ? "ag-theme-quartz-card-dark p-6 rounded-lg " : "p-6 ag-theme-quartz-card rounded-lg "
+    const cardClassname = darkMode ? "ag-theme-quartz-card-dark p-6 rounded-lg " : "p-6 ag-theme-quartz-card rounded-lg ";
+    const buttonClassname = darkMode ? "bg-grey-700 ag-theme-quartz-card-dark h-12 " : "ag-theme-quartz-card h-12 ";
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -335,10 +337,31 @@ const Dash = () => {
                 <div className={modalOpen ? "" : ""}>
                     <div className={`${darkMode ? "ag-theme-quartz-card-dark" : "ag-theme-quartz-card"} w-full h-20 flex justify-between items-center p-6`}>
                         <h1 className="text-3xl">Your Dashboard</h1>
-                        <div className="text-gray-600 space-x-2">
-                            <button onClick={toggleDarkMode}>Toggle Dark</button>
-                            <button onClick={openModal}>Add New</button>
-                            <button onClick={logout}>Logout</button>
+                        <div className="text-gray-600 space-x-2 flex justify-between items-center">
+                            <button className={" bg-blue-700 text-white h-12"} onClick={openModal}>Add New +</button>
+                            <button className={buttonClassname} onClick={toggleDarkMode}>{darkMode ?
+                                <svg xmlns="http://www.w3.org/2000/svg" width="66" height="66" viewBox="0 0 24 24"
+                                     className="duoicon duoicon-sun size-8" style={{color: "gold"}}>
+                                    <path fill="currentColor"
+                                          d="M12 18.5a1.5 1.5 0 0 1 1.493 1.356L13.5 20v1a1.5 1.5 0 0 1-2.993.144L10.5 21v-1a1.5 1.5 0 0 1 1.5-1.5Zm0-17a1.5 1.5 0 0 1 1.493 1.356L13.5 3v1a1.5 1.5 0 0 1-2.993.144L10.5 4V3A1.5 1.5 0 0 1 12 1.5Zm5.303 3.075a1.5 1.5 0 0 1 2.225 2.008l-.103.114-.707.707a1.5 1.5 0 0 1-2.225-2.008l.103-.114.707-.707Zm-12.728 0a1.5 1.5 0 0 1 2.008-.103l.114.103.707.707a1.5 1.5 0 0 1-2.008 2.225l-.114-.103-.707-.707a1.5 1.5 0 0 1 0-2.122ZM21 10.5a1.5 1.5 0 0 1 .144 2.993L21 13.5h-1a1.5 1.5 0 0 1-.144-2.993L20 10.5h1Zm-17 0a1.5 1.5 0 0 1 .144 2.993L4 13.5H3a1.5 1.5 0 0 1-.144-2.993L3 10.5h1Z"
+                                          className="duoicon-primary-layer"></path>
+                                    <path fill="currentColor"
+                                          d="M12 6c4.619 0 7.506 5 5.196 9A6 6 0 0 1 12 18c-4.619 0-7.506-5-5.196-9A6 6 0 0 1 12 6Z"
+                                          className="duoicon-secondary-layer" opacity=".3"></path>
+                                    <path fill="currentColor"
+                                          d="M5.282 16.596a1.5 1.5 0 0 1 2.225 2.008l-.103.114-.707.707a1.5 1.5 0 0 1-2.225-2.008l.103-.114.707-.707Zm11.314 0a1.5 1.5 0 0 1 2.008-.103l.114.103.707.707a1.5 1.5 0 0 1-2.008 2.225l-.114-.103-.707-.707a1.5 1.5 0 0 1 0-2.122Z"
+                                          className="duoicon-primary-layer"></path>
+                                </svg> :
+                                <svg xmlns="http://www.w3.org/2000/svg" width="66" height="66" viewBox="0 0 24 24"
+                                     className="duoicon duoicon-moon-stars size-8" style={{color: rgb(99, 102, 241)}}>
+                                    <path fill="currentColor"
+                                          d="M12.477 4.546A1.01 1.01 0 0 1 13.5 3.127c.025.002.049.006.074.01 6.821 1.213 9.771 9.356 5.31 14.656-4.462 5.301-12.988 3.784-15.348-2.73a9.012 9.012 0 0 1-.399-1.489 1.01 1.01 0 0 1 1.339-1.125c.024.008.047.018.07.028 4.214 1.892 8.895-1.488 8.426-6.083a5.998 5.998 0 0 0-.495-1.848Z"
+                                          className="duoicon-secondary-layer" opacity=".3"></path>
+                                    <path fill="currentColor"
+                                          d="M8.397 2.857c.04-.09.166-.09.206 0l.102.222a5.191 5.191 0 0 0 1.97 2.172l.157.092c.073.04.075.144.003.187l-.003.002-.158.092a5.193 5.193 0 0 0-2.07 2.394.113.113 0 0 1-.195.022c-.004-.007-.009-.014-.012-.022l-.102-.222a5.191 5.191 0 0 0-1.97-2.172l-.158-.092a.108.108 0 0 1-.003-.187l.003-.002.158-.092a5.191 5.191 0 0 0 1.97-2.172l.102-.222ZM5.565 7.716l.064.14a3.257 3.257 0 0 0 1.237 1.363l.1.059a.068.068 0 0 1 0 .118l-.1.058a3.26 3.26 0 0 0-1.237 1.364l-.064.14a.07.07 0 0 1-.122.013.057.057 0 0 1-.008-.013l-.064-.14a3.26 3.26 0 0 0-1.237-1.364l-.1-.058a.068.068 0 0 1 0-.118l.1-.059c.534-.326.964-.8 1.236-1.364l.064-.14a.07.07 0 0 1 .122-.013.057.057 0 0 1 .008.013l.001.001Z"
+                                          className="duoicon-primary-layer"></path>
+                                </svg>}</button>
+                            <button className={buttonClassname} onClick={logout}>Logout</button>
                         </div>
                     </div>
                     {/*{modalOpen && <AddJobModal onAdd={handleAddJob} onClose={closeModal}/>}*/}
@@ -349,7 +372,9 @@ const Dash = () => {
 
                             <div className={cardClassname + ""}>
                                 <div className="text-5xl font-semibold mb-1">{jobs.length}</div>
-                                <div className="text-lg font-medium text-gray-400">Applications you have logged on this app</div>
+                                <div className="text-lg font-medium text-gray-400">Applications you have logged on this
+                                    app
+                                </div>
                             </div>
                             <div className={cardClassname + "hidden lg:block row-span-2 col-span-2 lg:col-span-3"}>
                                 <div className="text-start text-2xl font-semibold mb-1">Frequency</div>
