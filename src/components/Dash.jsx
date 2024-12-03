@@ -47,7 +47,7 @@ const Dash = () => {
             { field: 'industry', headerName: 'Industry', width: 150 },
             { field: 'companyName', headerName: 'Company', width: 200},
             { field: 'applicationDate', headerName: 'Applied', width: 150, editable: false},
-            { field: 'status', headerName: 'Status', width: 100, cellEditor: 'agSelectCellEditor', cellEditorParams: {values: ["Applied", "Interview", "Offer", "Accepted", "Declined"]} },
+            { field: 'status', headerName: 'Status', width: 100, cellEditor: 'agSelectCellEditor', cellEditorParams: {values: ["Applied", "Interview", "Offer", "Accepted", "Declined", "Rejected"]} },
             { field: 'source', headerName: 'Source', width: 150 },
             { headerName: 'Delete', cellRenderer: myButton }
         ],

@@ -197,13 +197,28 @@ const AddJobModal = ({ onAdd, onClose }) => {
                     </div>
                     <div className="flex flex-row md:flex-col">
                         <label className="block font-medium mb-1 w-1/2">Status</label>
-                        <input
+                        {/*<input
                             type="text"
                             value={status}
                             onChange={(e) => setStatus(e.target.value)}
                             className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             required
-                        />
+                        />*/}
+                        <select
+                            name="status"
+                            value={status}
+
+                            onChange={(e) => setStatus(e.target.value)}
+                            className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        >
+                            <option value="Applied">Applied</option>
+                            <option value="Interview">Interview</option>
+                            <option value="Offer">Offer</option>
+                            <option value="Accepted">Accepted</option>
+                            <option value="Declined">Declined</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
                     </div>
                     <div className="flex flex-row md:flex-col">
                         <label className="block font-medium mb-1 w-1/2">Source</label>
