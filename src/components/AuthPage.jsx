@@ -49,10 +49,8 @@ function AuthPage() {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-200">
-            {error && <p style={{ color: 'red' }}>{error.message}</p>}
+        <div className="flex justify-center items-center min-h-screen bg-gray-200 text-center">
             <div className="relative w-full mx-2 md:w-2/3 h-96 flex transition-all duration-500 rounded-2xl overflow-clip">
-                {/* Left side (Sign In or Welcome Back) */}
                 <div
                     className={`bg-gray-800 text-white py-6 flex flex-col justify-center transition-all duration-500 transform ${isSignIn ? 'w-3/5 md:w-2/3 p-6 md:p-24 xl:px-48' : 'w-2/5 md:w-1/3 p-3'}`}>
                     <h2 className="text-xl md:text-3xl font-bold">{isSignIn ? 'Sign In' : 'Welcome Back'}</h2>
@@ -77,6 +75,7 @@ function AuthPage() {
                                 className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                                 Sign In
                             </button>
+                            {error && <p style={{ color: 'red' }}>{error.message}</p>}
                         </div>
                     ) : (
                         <>
@@ -90,7 +89,6 @@ function AuthPage() {
                     )}
                 </div>
 
-                {/* Right side (Sign Up or New User?) */}
                 <div
                     className={`bg-white text-gray-800 p-6 flex flex-col justify-center transition-all duration-500 transform ${isSignIn ? 'w-2/5 md:w-1/3 p-3' : 'w-3/5 md:w-2/3 p-6 md:p-24 xl:px-48'}`}>
                     {isSignIn ? (
@@ -125,6 +123,7 @@ function AuthPage() {
                                 className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                                 Sign Up
                             </button>
+                            {error && <p style={{ color: 'red' }}>{error.message}</p>}
                         </div>
                     )}
                 </div>
