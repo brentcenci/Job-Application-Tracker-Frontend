@@ -49,13 +49,14 @@ const Dash = () => {
         rowData: jobs,
         columnDefs: [
             { field: 'jobTitle', headerName: 'Job Title', width: 200},
-            { field: 'jobLevel', headerName: 'Level', width: 150},
+            { field: 'jobLevel', headerName: 'Level', width: 120},
             { field: 'industry', headerName: 'Industry', width: 150 },
-            { field: 'companyName', headerName: 'Company', width: 200},
+            { field: 'companyName', headerName: 'Company', width: 150},
             { field: 'applicationDate', headerName: 'Applied', width: 150, editable: false},
             { field: 'status', headerName: 'Status', width: 100, cellEditor: 'agSelectCellEditor', cellEditorParams: {values: ["Applied", "Interview", "Offer", "Accepted", "Declined", "Rejected"]} },
             { field: 'source', headerName: 'Source', width: 150 },
-            { headerName: 'Delete', cellRenderer: myButton }
+            { field: 'url', headerName: 'URL (if given)' },
+            { headerName: 'Delete', cellRenderer: myButton, width: 120 }
         ],
             defaultColDef: {
             sortable: true,
@@ -219,13 +220,14 @@ const Dash = () => {
             rowData: jobs,
             columnDefs: [
                 { field: 'jobTitle', headerName: 'Job Title', width: 200},
-                { field: 'jobLevel', headerName: 'Level', width: 150},
+                { field: 'jobLevel', headerName: 'Level', width: 120},
                 { field: 'industry', headerName: 'Industry', width: 150 },
-                { field: 'companyName', headerName: 'Company', width: 200},
+                { field: 'companyName', headerName: 'Company', width: 150},
                 { field: 'applicationDate', headerName: 'Applied', width: 150, editable: false},
-                { field: 'status', headerName: 'Status', width: 100, cellEditor: 'agSelectCellEditor', cellEditorParams: {values: ["Applied", "Interview", "Offer", "Accepted", "Declined"]} },
+                { field: 'status', headerName: 'Status', width: 100, cellEditor: 'agSelectCellEditor', cellEditorParams: {values: ["Applied", "Interview", "Offer", "Accepted", "Declined", "Rejected"]} },
                 { field: 'source', headerName: 'Source', width: 150 },
-                { headerName: 'Delete', cellRenderer: myButton }
+                { field: 'url', headerName: 'URL (if given)' },
+                { headerName: 'Delete', cellRenderer: myButton, width: 120 }
             ],
             defaultColDef: {
                 sortable: true,
@@ -327,7 +329,8 @@ const Dash = () => {
         console.log("Edit request: ", event);
         console.log("JobId: ", event.data.jobId)
         console.log("Old Value: ", event.oldValue, ", New Value: ", event.value);
-        jobService.updateJob(event.data, event.column.colId, event.value, token).then((response) => {
+        let newValue = (event?.newValue === null || event?.newValue === "null" || event?.newValue === "") ? "" : event.newValue;
+        jobService.updateJob(event.data, event.column.colId, newValue , token).then((response) => {
             console.log("Updated job:", response);
             console.log("Fetching jobs with token:", token);
             setIsLoading(true);

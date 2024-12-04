@@ -146,7 +146,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
                 </div>
                 <form onSubmit={handleSubmit} className="text-sm space-y-1 md:space-y-2">
                     <div className="flex flex-row md:flex-col">
-                        <label className="block font-medium mb-1 w-1/2">Job Title</label>
+                        <label className="block font-medium mb-1 w-1/2">Job Title<span className="text-red-600">*</span></label>
                         <input
                             type="text"
                             value={jobTitle}
@@ -156,7 +156,8 @@ const AddJobModal = ({ onAdd, onClose }) => {
                         />
                     </div>
                     <div className="flex flex-row md:flex-col">
-                        <label className="block font-medium mb-1 w-1/2">Company Name</label>
+                        <label className="block font-medium mb-1 w-1/2">Company Name<span
+                            className="text-red-600">*</span></label>
                         <input
                             type="text"
                             value={companyName}
@@ -166,7 +167,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
                         />
                     </div>
                     <div className="flex flex-row md:flex-col">
-                    <label className="block font-medium mb-1 w-1/2">Job Level</label>
+                    <label className="block font-medium mb-1 w-1/2">Job Level<span className="text-red-600">*</span></label>
                         <input
                             type="text"
                             value={jobLevel}
@@ -176,7 +177,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
                         />
                     </div>
                     <div className="flex flex-row md:flex-col">
-                        <label className="block font-medium mb-1 w-1/2">Industry</label>
+                        <label className="block font-medium mb-1 w-1/2">Industry<span className="text-red-600">*</span></label>
                         <input
                             type="text"
                             value={industry}
@@ -186,7 +187,8 @@ const AddJobModal = ({ onAdd, onClose }) => {
                         />
                     </div>
                     <div className="flex flex-row md:flex-col">
-                        <label className="block font-medium mb-1 w-1/2">Application Date</label>
+                        <label className="block font-medium mb-1 w-1/2">Application Date<span
+                            className="text-red-600">*</span></label>
                         <input
                             type="date"
                             value={applicationDate}
@@ -196,7 +198,8 @@ const AddJobModal = ({ onAdd, onClose }) => {
                         />
                     </div>
                     <div className="flex flex-row md:flex-col">
-                        <label className="block font-medium mb-1 w-1/2">Status</label>
+                        <label className="block font-medium mb-1 w-1/2">Status<span
+                            className="text-red-600">*</span></label>
                         {/*<input
                             type="text"
                             value={status}
@@ -221,7 +224,8 @@ const AddJobModal = ({ onAdd, onClose }) => {
                         </select>
                     </div>
                     <div className="flex flex-row md:flex-col">
-                        <label className="block font-medium mb-1 w-1/2">Source</label>
+                        <label className="block font-medium mb-1 w-1/2">Source<span
+                            className="text-red-600">*</span></label>
                         <input
                             type="text"
                             value={source}
