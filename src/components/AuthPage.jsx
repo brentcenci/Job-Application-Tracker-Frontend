@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {useAuth} from "@/src/services/authState.jsx";
 import authService from "@/src/services/authService.js";
 import {HttpStatusCode} from "axios";
+import icon from "/JobSeekerIcon.svg";
 
 function AuthPage() {
     const [isSignIn, setIsSignIn] = useState(false);
@@ -49,7 +50,10 @@ function AuthPage() {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-200 text-center">
+        <div className="flex flex-col justify-center items-center min-h-screen bg-gray-200 text-center">
+            <div className="flex space-x-10 justify-center">
+                <img src={icon} className={"size-40 mb-20"}></img>
+            </div>
             <div className="relative w-full mx-2 md:w-2/3 h-96 flex transition-all duration-500 rounded-2xl overflow-clip">
                 <div
                     className={`bg-gray-800 text-white py-6 flex flex-col justify-center transition-all duration-500 transform ${isSignIn ? 'w-3/5 md:w-2/3 p-6 md:p-24 xl:px-48' : 'w-2/5 md:w-1/3 p-3'}`}>
