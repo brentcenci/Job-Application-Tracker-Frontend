@@ -13,6 +13,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                     </Routes>
                 </Router>
+                <h1 className="bg-slate-800 text-xl text-white w-full p-6">Made by <a href="https://github.com/brentcenci" target="_blank">Brent Cenci</a></h1>
             </AuthProvider>
 
 
