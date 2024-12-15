@@ -1,5 +1,5 @@
 import jobService from "../services/jobService.js";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const AddJobModal = ({ onAdd, onClose }) => {
     const [jobTitle, setJobTitle] = useState("");
@@ -45,9 +45,9 @@ const AddJobModal = ({ onAdd, onClose }) => {
         }
     };
 
-    return (
+    /*return (
         <div className="z-10">
-            <div className="z-10 flex justify-center">
+            <div className="z-10 flex justify-center bg-gray-800">
                 <div className="modal-content ">
                 <span className="close" onClick={onClose}>
                     &times;
@@ -130,6 +130,127 @@ const AddJobModal = ({ onAdd, onClose }) => {
                 </div>
             </div>
 
+        </div>
+    );*/
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm overflow-y-auto">
+                <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-lg md:text-2xl font-semibold">Add Job Application</h2>
+                    <button
+                        className="bg-red-500 text-white hover:bg-red-600 text-lg md:text-2xl font-bold py-1 px-3"
+                        onClick={onClose}
+                    >
+                        &times;
+                    </button>
+                </div>
+                <form onSubmit={handleSubmit} className="text-sm space-y-1 md:space-y-2">
+                    <div className="flex flex-row md:flex-col">
+                        <label className="block font-medium mb-1 w-1/2">Job Title<span className="text-red-600">*</span></label>
+                        <input
+                            type="text"
+                            value={jobTitle}
+                            onChange={(e) => setJobTitle(e.target.value)}
+                            className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-row md:flex-col">
+                        <label className="block font-medium mb-1 w-1/2">Company Name<span
+                            className="text-red-600">*</span></label>
+                        <input
+                            type="text"
+                            value={companyName}
+                            onChange={(e) => setCompanyName(e.target.value)}
+                            className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-row md:flex-col">
+                    <label className="block font-medium mb-1 w-1/2">Job Level<span className="text-red-600">*</span></label>
+                        <input
+                            type="text"
+                            value={jobLevel}
+                            onChange={(e) => setJobLevel(e.target.value)}
+                            className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-row md:flex-col">
+                        <label className="block font-medium mb-1 w-1/2">Industry<span className="text-red-600">*</span></label>
+                        <input
+                            type="text"
+                            value={industry}
+                            onChange={(e) => setIndustry(e.target.value)}
+                            className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-row md:flex-col">
+                        <label className="block font-medium mb-1 w-1/2">Application Date<span
+                            className="text-red-600">*</span></label>
+                        <input
+                            type="date"
+                            value={applicationDate}
+                            onChange={(e) => setApplicationDate(e.target.value)}
+                            className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-row md:flex-col">
+                        <label className="block font-medium mb-1 w-1/2">Status<span
+                            className="text-red-600">*</span></label>
+                        {/*<input
+                            type="text"
+                            value={status}
+                            onChange={(e) => setStatus(e.target.value)}
+                            className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />*/}
+                        <select
+                            name="status"
+                            value={status}
+
+                            onChange={(e) => setStatus(e.target.value)}
+                            className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        >
+                            <option value="Applied">Applied</option>
+                            <option value="Interview">Interview</option>
+                            <option value="Offer">Offer</option>
+                            <option value="Accepted">Accepted</option>
+                            <option value="Declined">Declined</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                    </div>
+                    <div className="flex flex-row md:flex-col">
+                        <label className="block font-medium mb-1 w-1/2">Source<span
+                            className="text-red-600">*</span></label>
+                        <input
+                            type="text"
+                            value={source}
+                            onChange={(e) => setSource(e.target.value)}
+                            className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-row md:flex-col">
+                        <label className="block font-medium mb-1 w-1/2">URL</label>
+                        <input
+                            type="text"
+                            value={url}
+                            onChange={(e) => setUrl(e.target.value)}
+                            className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        className="w-full py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700"
+                    >
+                        Add Job
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };

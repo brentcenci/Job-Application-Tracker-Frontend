@@ -2,8 +2,6 @@ import './App.css'
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Home from "./components/Home.jsx";
 import {AuthProvider} from "./services/authState.jsx";
-import Dash from "@/src/components/Dash.jsx";
-import AuthPage from "@/src/components/AuthPage.jsx";
 
 function App() {
 
@@ -15,6 +13,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                     </Routes>
                 </Router>
+                <h1 className="bg-slate-800 text-xl text-white w-full p-6">Made by <a href="https://github.com/brentcenci" target="_blank">Brent Cenci</a></h1>
             </AuthProvider>
 
 
