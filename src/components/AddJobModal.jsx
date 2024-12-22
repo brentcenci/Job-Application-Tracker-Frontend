@@ -149,6 +149,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
                         <label className="block font-medium mb-1 w-1/2">Job Title<span className="text-red-600">*</span></label>
                         <input
                             type="text"
+                            placeholder="Junior Software Engineer"
                             value={jobTitle}
                             onChange={(e) => setJobTitle(e.target.value)}
                             className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -160,6 +161,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
                             className="text-red-600">*</span></label>
                         <input
                             type="text"
+                            placeholder="TechConsults"
                             value={companyName}
                             onChange={(e) => setCompanyName(e.target.value)}
                             className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -170,6 +172,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
                     <label className="block font-medium mb-1 w-1/2">Job Level<span className="text-red-600">*</span></label>
                         <input
                             type="text"
+                            placeholder="Junior"
                             value={jobLevel}
                             onChange={(e) => setJobLevel(e.target.value)}
                             className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -180,6 +183,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
                         <label className="block font-medium mb-1 w-1/2">Industry<span className="text-red-600">*</span></label>
                         <input
                             type="text"
+                            placeholder="Consultations"
                             value={industry}
                             onChange={(e) => setIndustry(e.target.value)}
                             className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -228,6 +232,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
                             className="text-red-600">*</span></label>
                         <input
                             type="text"
+                            placeholder="Seek"
                             value={source}
                             onChange={(e) => setSource(e.target.value)}
                             className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -238,6 +243,7 @@ const AddJobModal = ({ onAdd, onClose }) => {
                         <label className="block font-medium mb-1 w-1/2">URL</label>
                         <input
                             type="text"
+                            placeholder="www.seek.com.au/jobs/1"
                             value={url}
                             onChange={(e) => setUrl(e.target.value)}
                             className="w-full px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
