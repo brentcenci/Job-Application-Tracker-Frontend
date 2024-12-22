@@ -7,7 +7,8 @@ const attemptRegister = async (username, password) => {
 };
 
 const attemptLogin = async (username, password) => {
-    console.log(constant.API_URL);
+    console.log("With Vite:", import.meta.env.VITE_BACKEND_URL);
+    console.log("Without Vite:", import.meta.env.BACKEND_URL);
     const response = await axios.post(`${constant.API_URL}/login`, { username, password });
     return response.data
 };
