@@ -24,7 +24,6 @@ For the table component, I used AgDataGrid for React, as this gave me more desig
 
 ## Project Screenshots 📸
 
-This is a placeholder for a few of the screenshots from the site.
 ![image](https://github.com/user-attachments/assets/1265f292-0e33-40a8-9615-22858a43a197)
 ![image](https://github.com/user-attachments/assets/ba332bc9-c3c4-444b-8e76-3e4329e7de57)
 ![image](https://github.com/user-attachments/assets/8185c879-b636-43b3-83f0-59ea8b585e51)
