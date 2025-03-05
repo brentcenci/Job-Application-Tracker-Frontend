@@ -2,7 +2,7 @@
 
 ## Overview 📝📌
 
-This is the site dashboard to interact with and view job applications for my Job Application Tracker project, which works in conjunction with the Kotlin / Ktor backend with a MongoDB database (see www.github.com/brentcenci/placeholder).
+This is the site dashboard to interact with and view job applications for my Job Application Tracker project, which works in conjunction with the Kotlin / Ktor backend with a MongoDB database (see https://github.com/brentcenci/Job-Application-Tracker-Backend).
 
 The site includes the following features:
 - Light and Dark modes
@@ -13,7 +13,6 @@ The site includes the following features:
 - Live-edit existing applications within the table
 - Delete applications via the table
 
-Visit and interact with this site live at: www.placeholder.com.
 
 ## Technologies 💻
 It is built using Vite, React, and Tailwind, with Axios for network connection requests to my backend API.
@@ -26,3 +25,6 @@ For the table component, I used AgDataGrid for React, as this gave me more desig
 ## Project Screenshots 📸
 
 This is a placeholder for a few of the screenshots from the site.
+![image](https://github.com/user-attachments/assets/1265f292-0e33-40a8-9615-22858a43a197)
+![image](https://github.com/user-attachments/assets/ba332bc9-c3c4-444b-8e76-3e4329e7de57)
+![image](https://github.com/user-attachments/assets/8185c879-b636-43b3-83f0-59ea8b585e51)
